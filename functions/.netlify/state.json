@@ -1,0 +1,19 @@
+{
+	"geolocation": {
+		"data": {
+			"city": "Samarkand",
+			"country": {
+				"code": "UZ",
+				"name": "Uzbekistan"
+			},
+			"subdivision": {
+				"code": "SA",
+				"name": "Samarqand Region"
+			},
+			"timezone": "Asia/Samarkand",
+			"latitude": 39.6588,
+			"longitude": 66.9615
+		},
+		"timestamp": 1773681410437
+	}
+}
