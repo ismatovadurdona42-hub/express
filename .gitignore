@@ -1,26 +1,37 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# dependencies
+# Dependencies (Kutubxonalar)
+node_modules/
 /node_modules
-/.pnp
+backend/node_modules/
+.pnp
 .pnp.js
 
-# testing
-/coverage
-
-# production
+# Production (Tayyor loyiha fayllari)
 /build
+/dist
+dist/
 
-# misc
-.DS_Store
+# Netlify (Serverless sozlamalari)
+.netlify/
+/.netlify
+
+# Logs (Xatolik hisobotlari)
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+logs/
+*.log
+
+# Environment Variables (Maxfiy kalitlar - buni Git-ga yuklamaslik shart!)
+.env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
 
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+# OS Metadata (Tizim fayllari)
+.DS_Store
+Thumbs.db
 
-# Local Netlify folder
-.netlify
+# Editors (Kod muharriri sozlamalari)
+.vscode/
+.idea/
