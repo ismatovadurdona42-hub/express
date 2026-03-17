@@ -10,7 +10,7 @@ const products = [
   { id: 4, name: "Gamburger", price: 25000, category: "fast-food", image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400", desc: "Maxsus sousli va yangi sabzavotli burger." },
   { id: 5, name: "Lavash", price: 28000, category: "fast-food", image: "https://images.unsplash.com/photo-1623156346149-d5bc8bd27094?w=400", desc: "Mol go'shtidan tayyorlangan issiq lavash." },
   { id: 6, name: "Osh (Palov)", price: 30000, category: "tushlik", image: "https://images.unsplash.com/photo-1512058560366-cd2427ff5961?w=400", desc: "Zirvakli, mayizli haqiqiy o'zbek oshi." },
-  { id: 7, name: "Steyk", price: 75000, category: "kechki-ovqat", image: "https://images.unsplash.com/photo-1546241072-48010ad28c2c?w=400", desc: "Olovda pishirilgan yumshoq mol go'shti." },
+  { id: 7, name: "Steyk", price: 75000, category: "kechki-ovqat", image: "https://images.unsplash.com/photo-1546241072-48010ad28c2c?w=400", desc: "Olovda pishirilgan yumshoq mol go'sht." },
   { id: 8, name: "Coca-Cola 0.5L", price: 8000, category: "ichimliklar", image: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=400", desc: "Muzdek tetiklashtiruvchi ichimlik." },
   { id: 10, name: "Medoviy tort", price: 15000, category: "shirinliklar", image: "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=400", desc: "Asalli va mayin kremdan tayyorlangan tort." },
 ];
@@ -91,23 +91,23 @@ export default function App() {
 
     let cartText = "";
     cart.forEach((item, idx) => {
-      cartText += `${idx + 1}. 🍱 <b>${item.name}</b> x ${item.quantity} = ${(item.price * item.quantity).toLocaleString()} so'm\n`;
+      cartText += `${idx + 1}. 🍱 ${item.name} x ${item.quantity} = ${(item.price * item.quantity).toLocaleString()} so'm\n`;
     });
 
     const message = `
-<b>🔥 YANGI BUYURTMA!</b>
+🔥 *YANGI BUYURTMA!*
 ▬▬▬▬▬▬▬▬▬▬▬▬▬▬
-👤 <b>Mijoz:</b> ${name}
-📞 <b>Tel:</b> ${phone}
-📍 <b>Manzil:</b> ${deliveryType === "delivery" ? address : "Olib ketish"}
-🕒 <b>Vaqt:</b> ${requestedTime}
-📦 <b>Tur:</b> ${deliveryType === 'delivery' ? '🚚 Yetkazib berish' : '🏃 Olib ketish'}
-💬 <b>Izoh:</b> ${comment || "Izoh yo'q"}
-💳 <b>To'lov:</b> ${paymentMethod.toUpperCase()}
+👤 *Mijoz:* ${name}
+📞 *Tel:* ${phone}
+📍 *Manzil:* ${deliveryType === "delivery" ? address : "Olib ketish"}
+🕒 *Vaqt:* ${requestedTime}
+📦 *Tur:* ${deliveryType === 'delivery' ? '🚚 Yetkazib berish' : '🏃 Olib ketish'}
+💬 *Izoh:* ${comment || "Izoh yo'q"}
+💳 *To'lov:* ${paymentMethod.toUpperCase()}
 ▬▬▬▬▬▬▬▬▬▬▬▬▬▬
-🛒 <b>Savatda:</b>
+🛒 *Savatda:*
 ${cartText}
-💰 <b>JAMI:</b> <u>${total.toLocaleString()} so'm</u>
+💰 *JAMI:* ${total.toLocaleString()} so'm
 `;
 
     try {
@@ -117,11 +117,9 @@ ${cartText}
         body: JSON.stringify({
           chat_id: CHAT_ID,
           text: message,
-          parse_mode: "HTML"
+          parse_mode: "Markdown"
         }),
       });
-
-      const result = await response.json();
 
       if (response.ok) {
         alert("Buyurtmangiz muvaffaqiyatli yuborildi! ✅");
@@ -129,7 +127,7 @@ ${cartText}
         setShowModal(false);
         setName(""); setPhone(""); setAddress(""); setComment("");
       } else {
-        alert(`Xatolik: ${result.description} ❌`);
+        alert("Telegramga yuborishda xatolik yuz berdi! ❌");
       }
     } catch (error) {
       console.error("Xato:", error);
