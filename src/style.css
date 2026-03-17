@@ -340,3 +340,28 @@ body {
         justify-content: flex-start;
     }
 }
+.order-btn-float {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #ff007a;
+    /* Tugma rangi */
+    color: white;
+    /* Matn rangi */
+    padding: 15px 25px;
+    border-radius: 50px;
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(255, 0, 122, 0.4);
+    z-index: 1000;
+    cursor: pointer;
+}
+
+.order-btn-float span:last-child {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 5px 10px;
+    border-radius: 10px; }
