@@ -10,7 +10,7 @@ const products = [
   { id: 4, name: "Gamburger", price: 25000, category: "fast-food", image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400", desc: "Maxsus sousli va yangi sabzavotli burger." },
   { id: 5, name: "Lavash", price: 28000, category: "fast-food", image: "https://images.unsplash.com/photo-1623156346149-d5bc8bd27094?w=400", desc: "Mol go'shtidan tayyorlangan issiq lavash." },
   { id: 6, name: "Osh (Palov)", price: 30000, category: "tushlik", image: "https://images.unsplash.com/photo-1512058560366-cd2427ff5961?w=400", desc: "Zirvakli, mayizli haqiqiy o'zbek oshi." },
-  { id: 7, name: "Steyk", price: 75000, category: "kechki-ovqat", image: "https://images.unsplash.com/photo-1546241072-48010ad28c2c?w=400", desc: "Olovda pishirilgan yumshoq mol go'shthti." },
+  { id: 7, name: "Steyk", price: 75000, category: "kechki-ovqat", image: "https://images.unsplash.com/photo-1546241072-48010ad28c2c?w=400", desc: "Olovda pishirilgan yumshoq mol go'sht." },
   { id: 8, name: "Coca-Cola 0.5L", price: 8000, category: "ichimliklar", image: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=400", desc: "Muzdek tetiklashtiruvchi ichimlik." },
   { id: 10, name: "Medoviy tort", price: 15000, category: "shirinliklar", image: "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=400", desc: "Asalli va mayin kremdan tayyorlangan tort." },
 ];
@@ -79,43 +79,59 @@ export default function App() {
 
   const removeFromCart = (id) => setCart(cart.filter((item) => item.id !== id));
 
-  // BUYURTMA YUBORISH (BACKEND BILAN)
+  // BUYURTMA YUBORISH (TO'G'RIDAN-TO'G'RI TELEGRAMGA)
   const sendOrder = async () => {
     if (!name || !phone) {
       alert("Iltimos, ism va telefon raqamingizni kiriting!");
       return;
     }
 
-    const orderData = {
-      name,
-      phone,
-      address: deliveryType === "delivery" ? address : "Olib ketish",
-      comment,
-      paymentMethod,
-      deliveryType,
-      requestedTime,
-      items: cart,
-      total,
-    };
+    const TOKEN = "8058186832:AAGoD8b9Z0gsmJBszefcfEhiQ6RJYOOT8lY";
+    const CHAT_ID = "7326034201";
+
+    let cartText = "";
+    cart.forEach((item, idx) => {
+      cartText += `${idx + 1}. 🍱 ${item.name} x ${item.quantity} = ${(item.price * item.quantity).toLocaleString()} so'm\n`;
+    });
+
+    const message = `
+🔥 *YANGI BUYURTMA!*
+▬▬▬▬▬▬▬▬▬▬▬▬▬▬
+👤 *Mijoz:* ${name}
+📞 *Tel:* ${phone}
+📍 *Manzil:* ${deliveryType === "delivery" ? address : "Olib ketish"}
+🕒 *Vaqt:* ${requestedTime}
+📦 *Tur:* ${deliveryType === 'delivery' ? '🚚 Yetkazib berish' : '🏃 Olib ketish'}
+💬 *Izoh:* ${comment || "Izoh yo'q"}
+💳 *To'lov:* ${paymentMethod.toUpperCase()}
+▬▬▬▬▬▬▬▬▬▬▬▬▬▬
+🛒 *Savatda:*
+${cartText}
+💰 *JAMI:* ${total.toLocaleString()} so'm
+`;
 
     try {
-      // Netlify function manzili
-      const response = await fetch('/.netlify/functions/index', {
+      const response = await fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(orderData),
+        body: JSON.stringify({
+          chat_id: CHAT_ID,
+          text: message,
+          parse_mode: "Markdown"
+        }),
       });
 
       if (response.ok) {
-        alert("Buyurtmangiz muvaffaqiyatli qabul qilindi! ✅");
-        setCart([]); // Savatchani tozalash
+        alert("Buyurtmangiz muvaffaqiyatli yuborildi! ✅");
+        setCart([]);
         setShowModal(false);
+        setName(""); setPhone(""); setAddress(""); setComment("");
       } else {
-        alert("Xatolik yuz berdi. Iltimos qaytadan urinib ko'ring! ❌");
+        alert("Telegramga yuborishda xatolik yuz berdi! ❌");
       }
     } catch (error) {
       console.error("Xato:", error);
-      alert("Server bilan ulanishda xatolik! ❌");
+      alert("Internet bilan ulanishda xatolik! ❌");
     }
   };
 
@@ -165,31 +181,33 @@ export default function App() {
           </div>
         )}
 
-        {/* Savatcha va Buyurtma modali */}
+        {/* Savatcha va Yakunlash modali */}
         {showModal && (
           <div className="modal-overlay">
             <div className="modal-box">
               <div className="modal-header">
                 <h3>{step === "cart" ? "Savatcha" : "Yakunlash"}</h3>
-                <span style={{ cursor: 'pointer' }} onClick={() => setShowModal(false)}>✕</span>
+                <span style={{ cursor: 'pointer', fontSize: '24px' }} onClick={() => setShowModal(false)}>✕</span>
               </div>
 
               {step === "cart" ? (
-                <div style={{ paddingBottom: '20px' }}>
-                  {cart.map((item) => (
-                    <div key={item.id} className="cart-row">
-                      <div className="item-meta">
-                        <b>{item.name}</b>
-                        <small>{(item.price * item.quantity).toLocaleString()} so'm</small>
+                <div style={{ padding: '0 20px 20px 20px' }}>
+                  <div className="cart-list" style={{ maxHeight: '300px', overflowY: 'auto', marginBottom: '15px' }}>
+                    {cart.map((item) => (
+                      <div key={item.id} className="cart-row">
+                        <div className="item-meta">
+                          <b>{item.name}</b>
+                          <small>{(item.price * item.quantity).toLocaleString()} so'm</small>
+                        </div>
+                        <div className="cart-actions">
+                          <button onClick={() => decreaseQty(item.id)}>−</button>
+                          <span>{item.quantity}</span>
+                          <button onClick={() => addToCart(item)}>+</button>
+                          <button onClick={() => removeFromCart(item.id)} style={{ border: 'none', background: 'none' }}>🗑</button>
+                        </div>
                       </div>
-                      <div className="cart-actions">
-                        <button onClick={() => decreaseQty(item.id)}>−</button>
-                        <span>{item.quantity}</span>
-                        <button onClick={() => addToCart(item)}>+</button>
-                        <button onClick={() => removeFromCart(item.id)} style={{ border: 'none', background: 'none' }}>🗑</button>
-                      </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                   <div className="toggle-group">
                     <button className={deliveryType === "delivery" ? "active" : ""} onClick={() => setDeliveryType("delivery")}>🚚 Kuryer</button>
                     <button className={deliveryType === "pickup" ? "active" : ""} onClick={() => setDeliveryType("pickup")}>🏃 Olib ketish</button>
@@ -197,12 +215,12 @@ export default function App() {
                   <button className="action-primary-btn" onClick={() => setStep("checkout")}>Keyingi qadam</button>
                 </div>
               ) : (
-                <div style={{ paddingBottom: '20px' }}>
-                  <div className="toggle-group" style={{ flexDirection: 'column', gap: '5px' }}>
-                    <label style={{ marginLeft: '20px', fontSize: '14px', color: '#94a3b8' }}>Yetkazish vaqti:</label>
-                    <div style={{ display: 'flex', gap: '10px', padding: '0 20px' }}>
-                      <input type="time" className="modern-input" style={{ margin: 0 }} value={requestedTime === "Tezroq" ? "" : requestedTime} onChange={(e) => setRequestedTime(e.target.value)} />
-                      <button className={`nav-pill ${requestedTime === "Tezroq" ? "active" : ""}`} style={{ borderRadius: '16px' }} onClick={() => setRequestedTime("Tezroq")}>Hozir</button>
+                <div style={{ padding: '0 20px 20px 20px' }}>
+                  <div className="toggle-group" style={{ flexDirection: 'column', gap: '5px', marginBottom: '15px' }}>
+                    <label style={{ fontSize: '14px', color: '#94a3b8' }}>Yetkazish vaqti:</label>
+                    <div style={{ display: 'flex', gap: '10px' }}>
+                      <input type="time" className="modern-input" style={{ margin: 0, flex: 1 }} value={requestedTime === "Tezroq" ? "" : requestedTime} onChange={(e) => setRequestedTime(e.target.value)} />
+                      <button className={`nav-pill ${requestedTime === "Tezroq" ? "active" : ""}`} style={{ borderRadius: '16px', margin: 0 }} onClick={() => setRequestedTime("Tezroq")}>Hozir</button>
                     </div>
                   </div>
                   <input className="modern-input" placeholder="Ismingiz" value={name} onChange={(e) => setName(e.target.value)} />
@@ -214,7 +232,7 @@ export default function App() {
                     <button className={paymentMethod === "payme" ? "active" : ""} onClick={() => setPaymentMethod("payme")}>💳 Payme</button>
                   </div>
                   <button className="action-primary-btn" onClick={sendOrder}>Buyurtma berish</button>
-                  <button onClick={() => setStep("cart")} style={{ width: '100%', background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer' }}>← Orqaga</button>
+                  <button onClick={() => setStep("cart")} style={{ width: '100%', background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer', marginTop: '10px' }}>← Orqaga</button>
                 </div>
               )}
             </div>
