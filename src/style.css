@@ -1,3 +1,190 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
+
+:root {
+    --bg: #050508;
+    --surface: #12121a;
+    --accent: #ff007a;
+    --grad: linear-gradient(135deg, #ff007a 0%, #7928ca 100%);
+    --border: rgba(255, 255, 255, 0.08);
+    --text-main: #ffffff;
+    --text-dim: #94a3b8;
+}
+
+body {
+    margin: 0;
+    background-color: var(--bg);
+    background-image:
+        radial-gradient(circle at 50% -10%, #2a0a5e, transparent),
+        radial-gradient(circle at 0% 100%, #1a0533, transparent);
+    background-attachment: fixed;
+    color: var(--text-main);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* 1. Header & Logo */
+.logo {
+    font-size: 42px;
+    font-weight: 800;
+    text-align: center;
+    margin: 30px 0;
+    background: var(--grad);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -1px;
+}
+
+/* 2. Navigation (Kategoriyalar) */
+.category-scroll {
+    display: flex;
+    overflow-x: auto;
+    gap: 12px;
+    padding: 10px 20px 30px;
+    scrollbar-width: none;
+    justify-content: center;
+}
+
+.category-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.nav-pill {
+    padding: 12px 24px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border);
+    border-radius: 50px;
+    color: var(--text-dim);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.nav-pill.active {
+    background: var(--grad);
+    color: white;
+    border-color: transparent;
+    box-shadow: 0 8px 20px rgba(255, 0, 122, 0.3);
+    transform: translateY(-2px);
+}
+
+/* 3. Product Grid (Mahsulotlar ro'yxati) */
+.product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.product-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 28px;
+    padding: 18px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+    position: relative;
+}
+
+.product-card:hover {
+    border-color: var(--accent);
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateY(-5px);
+}
+
+.product-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 20px;
+    object-fit: cover;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.p-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+}
+
+.p-name {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.p-price {
+    color: var(--accent);
+    font-weight: 800;
+    font-size: 17px;
+}
+
+.add-btn {
+    background: var(--grad);
+    border: none;
+    color: white;
+    width: 48px;
+    height: 48px;
+    border-radius: 18px;
+    font-size: 26px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+}
+
+.add-btn:active {
+    transform: scale(0.9);
+}
+
+/* 4. Floating Cart Button (Pastdagi savatcha tugmasi) */
+.order-btn-float {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 450px;
+    padding: 22px 30px;
+    background: var(--grad);
+    border: none;
+    border-radius: 24px;
+    color: white;
+    font-weight: 800;
+    font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+    cursor: pointer;
+}
+
+/* 5. Modals (Oyna va Shaffoflik) */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(15px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    padding: 20px;
+}
 .modal-box {
     background: #0f0f15;
     width: 100%;
