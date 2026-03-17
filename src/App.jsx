@@ -79,6 +79,46 @@ export default function App() {
 
   const removeFromCart = (id) => setCart(cart.filter((item) => item.id !== id));
 
+  // BUYURTMA YUBORISH (BACKEND BILAN)
+  const sendOrder = async () => {
+    if (!name || !phone) {
+      alert("Iltimos, ism va telefon raqamingizni kiriting!");
+      return;
+    }
+
+    const orderData = {
+      name,
+      phone,
+      address: deliveryType === "delivery" ? address : "Olib ketish",
+      comment,
+      paymentMethod,
+      deliveryType,
+      requestedTime,
+      items: cart,
+      total,
+    };
+
+    try {
+      // Netlify function manzili
+      const response = await fetch('/.netlify/functions/index', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(orderData),
+      });
+
+      if (response.ok) {
+        alert("Buyurtmangiz muvaffaqiyatli qabul qilindi! ✅");
+        setCart([]); // Savatchani tozalash
+        setShowModal(false);
+      } else {
+        alert("Xatolik yuz berdi. Iltimos qaytadan urinib ko'ring! ❌");
+      }
+    } catch (error) {
+      console.error("Xato:", error);
+      alert("Server bilan ulanishda xatolik! ❌");
+    }
+  };
+
   return (
     <Router>
       <div className="app-container">
@@ -173,7 +213,7 @@ export default function App() {
                     <button className={paymentMethod === "cash" ? "active" : ""} onClick={() => setPaymentMethod("cash")}>💵 Naqd</button>
                     <button className={paymentMethod === "payme" ? "active" : ""} onClick={() => setPaymentMethod("payme")}>💳 Payme</button>
                   </div>
-                  <button className="action-primary-btn">Buyurtma berish</button>
+                  <button className="action-primary-btn" onClick={sendOrder}>Buyurtma berish</button>
                   <button onClick={() => setStep("cart")} style={{ width: '100%', background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer' }}>← Orqaga</button>
                 </div>
               )}
