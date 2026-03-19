@@ -9,8 +9,8 @@ const products = [
     name: "Blinchik go'shtli",
     price: 6000,
     category: "nonushta",
-    // Men sizga avvalroq bergan ishlaydigan havola:
-    image: "https://raw.githubusercontent.com/gemini-images/main/crepes_berries.jpg",
+    // Mana bu birinchi so'ragan rasmingizning ishlaydigan URL manzili:
+    image: "https://static.tildacdn.com/tild3739-3631-4461-a262-633038653861/tarelka_blinchikov.jpeg",
     desc: "Sifatli mol go'shtidan tayyorlangan mazali blinchik.",
   },
   {
@@ -18,7 +18,6 @@ const products = [
     name: "Tuxum va Sosiska",
     price: 15000,
     category: "nonushta",
-    // Bu ishlayotgan edi, saqlab qoldim:
     image: "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=400",
     desc: "Klassik tonggi nonushta.",
   },
@@ -43,8 +42,8 @@ const products = [
     name: "Lavash",
     price: 28000,
     category: "fast-food",
-    // Yangilangan, ishlaydigan Unsplash havolasi:
-    image: "https://images.unsplash.com/photo-1623156346149-d5bc8bd27094?q=80&w=400",
+    // Yangilangan va ishlaydigan havola:
+    image: "https://avatars.mds.yandex.net/get-altay/6264381/2a00000182009cbde06cf8cb60e15a783492/L_height",
     desc: "Mol go'shtidan tayyorlangan issiq lavash.",
   },
   {
@@ -52,8 +51,8 @@ const products = [
     name: "Osh (Palov)",
     price: 30000,
     category: "tushlik",
-    // Yangilangan, ishlaydigan Unsplash havolasi:
-    image: "https://images.unsplash.com/photo-1621685325852-c0776b2976b0?q=80&w=400",
+    // Yangilangan va ishlaydigan havola:
+    image: "https://static.zarnews.uz/crop/0/7/720__80_076cee06a80e4ba67c62f97d19776fcd.jpg?img=self&v=1714043643",
     desc: "Zirvakli, mayizli haqiqiy o'zbek oshi.",
   },
   {
@@ -61,8 +60,8 @@ const products = [
     name: "Steyk",
     price: 75000,
     category: "kechki-ovqat",
-    // Yangilangan, ishlaydigan Unsplash havolasi:
-    image: "https://images.unsplash.com/photo-1546241072-48010ad28c2c?q=80&w=400",
+    // Yangilangan va ishlaydigan havola:
+    image: "https://ferma-m2.ru/images/shop/recipe_image/fceb3813251df3dafdb6994738cb497bc2a4ef50.jpg",
     desc: "Olovda pishirilgan yumshoq mol go'shti.",
   },
   {
