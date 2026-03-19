@@ -22,7 +22,7 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-/* 1. Header & Logo */
+/* Header & Logo */
 .logo {
     font-size: 42px;
     font-weight: 800;
@@ -35,7 +35,7 @@ body {
     letter-spacing: -1px;
 }
 
-/* 2. Navigation (Kategoriyalar) */
+/* Navigation (Kategoriyalar) */
 .category-scroll {
     display: flex;
     overflow-x: auto;
@@ -70,7 +70,7 @@ body {
     transform: translateY(-2px);
 }
 
-/* 3. Product Grid (Mahsulotlar ro'yxati) */
+/* Product Grid */
 .product-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -150,7 +150,7 @@ body {
     transform: scale(0.9);
 }
 
-/* 4. Floating Cart Button (Pastdagi savatcha tugmasi) */
+/* Floating Cart Button */
 .order-btn-float {
     position: fixed;
     bottom: 30px;
@@ -173,7 +173,7 @@ body {
     cursor: pointer;
 }
 
-/* 5. Modals (Oyna va Shaffoflik) */
+/* Modals */
 .modal-overlay {
     position: fixed;
     inset: 0;
@@ -185,6 +185,7 @@ body {
     z-index: 2000;
     padding: 20px;
 }
+
 .modal-box {
     background: #0f0f15;
     width: 100%;
@@ -219,7 +220,7 @@ body {
     z-index: 100;
 }
 
-/* 6. Cart Items (Savatchadagi elementlar) */
+/* Cart Items */
 .cart-row {
     display: flex;
     justify-content: space-between;
@@ -235,7 +236,6 @@ body {
     display: flex;
     flex-direction: column;
     gap: 4px;
-    /* Yozuvlar yopishib qolmasligi uchun */
 }
 
 .item-meta b {
@@ -265,7 +265,7 @@ body {
     cursor: pointer;
 }
 
-/* 7. Inputs & Forms (Inputlar va Formlar) */
+/* Inputs & Forms */
 .modern-input {
     width: calc(100% - 40px);
     margin: 10px 20px;
@@ -338,31 +338,4 @@ body {
     .category-scroll {
         justify-content: flex-start;
     }
-}
-
-.order-btn-float {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: #ff007a;
-    /* Tugma rangi */
-    color: white;
-    /* Matn rangi */
-    padding: 15px 25px;
-    border-radius: 50px;
-    border: none;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-    font-weight: bold;
-    box-shadow: 0 4px 15px rgba(255, 0, 122, 0.4);
-    z-index: 1000;
-    cursor: pointer;
-}
-
-.order-btn-float span:last-child {
-    background: rgba(255, 255, 255, 0.2);
-    padding: 5px 10px;
-    border-radius: 10px;
 }

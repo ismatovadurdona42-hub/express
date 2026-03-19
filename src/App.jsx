@@ -4,7 +4,7 @@ import "./style.css";
 
 // Mahsulotlar ro'yxati
 const products = [
-  { id: 1, name: "Blinchik go'shtli", price: 6000, category: "nonushta", image: "https://images.unsplash.com/photo-1517701604599-bb29b56509d1?w=400", desc: "Sifatli mol go'shtidan tayyorlangan mazali blinchik." },
+  { id: 1, name: "Blinchik go'shtli", price: 6000, category: "nonushta", image: "https://kukusiki.ru/blog/prostoy-i-byudzhetnyy-retsept-vkusneyshikh-blinchikov-s-dzhemom", desc: "Sifatli mol go'shtidan tayyorlangan mazali blinchik." },
   { id: 2, name: "Tuxum va Sosiska", price: 15000, category: "nonushta", image: "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=400", desc: "Klassik tonggi nonushta." },
   { id: 3, name: "Sho'rva", price: 22000, category: "ovqatlar", image: "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400", desc: "Issiq va to'yimli go'shtli sho'rva." },
   { id: 4, name: "Gamburger", price: 25000, category: "fast-food", image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400", desc: "Maxsus sousli va yangi sabzavotli burger." },
