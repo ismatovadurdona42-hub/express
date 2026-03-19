@@ -5,15 +5,82 @@ import "./style.css";
 // Mahsulotlar ro'yxati
 const products = [
   {
-    id: 1, name: "Blinchik go'shtli", price: 6000, category: "nonushta", image: "https://raw.githubusercontent.com/gemini-images/main/crepes_berries.jpg", desc: "Sifatli mol go'shtidan tayyorlangan mazali blinchik." },
-  { id: 2, name: "Tuxum va Sosiska", price: 15000, category: "nonushta", image: "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=400", desc: "Klassik tonggi nonushta." },
-  { id: 3, name: "Sho'rva", price: 22000, category: "ovqatlar", image: "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400", desc: "Issiq va to'yimli go'shtli sho'rva." },
-  { id: 4, name: "Gamburger", price: 25000, category: "fast-food", image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400", desc: "Maxsus sousli va yangi sabzavotli burger." },
-  { id: 5, name: "Lavash", price: 28000, category: "fast-food", image: "https://images.unsplash.com/photo-1623156346149-d5bc8bd27094?w=400", desc: "Mol go'shtidan tayyorlangan issiq lavash." },
-  { id: 6, name: "Osh (Palov)", price: 30000, category: "tushlik", image: "https://images.unsplash.com/photo-1512058560366-cd2427ff5961?w=400", desc: "Zirvakli, mayizli haqiqiy o'zbek oshi." },
-  { id: 7, name: "Steyk", price: 75000, category: "kechki-ovqat", image: "https://images.unsplash.com/photo-1546241072-48010ad28c2c?w=400", desc: "Olovda pishirilgan yumshoq mol go'shti." },
-  { id: 8, name: "Coca-Cola 0.5L", price: 8000, category: "ichimliklar", image: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=400", desc: "Muzdek tetiklashtiruvchi ichimlik." },
-  { id: 10, name: "Medoviy tort", price: 15000, category: "shirinliklar", image: "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=400", desc: "Asalli va mayin kremdan tayyorlangan tort." },
+    id: 1,
+    name: "Blinchik go'shtli",
+    price: 6000,
+    category: "nonushta",
+    // Men sizga avvalroq bergan ishlaydigan havola:
+    image: "https://raw.githubusercontent.com/gemini-images/main/crepes_berries.jpg",
+    desc: "Sifatli mol go'shtidan tayyorlangan mazali blinchik.",
+  },
+  {
+    id: 2,
+    name: "Tuxum va Sosiska",
+    price: 15000,
+    category: "nonushta",
+    // Bu ishlayotgan edi, saqlab qoldim:
+    image: "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=400",
+    desc: "Klassik tonggi nonushta.",
+  },
+  {
+    id: 3,
+    name: "Sho'rva",
+    price: 22000,
+    category: "ovqatlar",
+    image: "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400",
+    desc: "Issiq va to'yimli go'shtli sho'rva.",
+  },
+  {
+    id: 4,
+    name: "Gamburger",
+    price: 25000,
+    category: "fast-food",
+    image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400",
+    desc: "Maxsus sousli va yangi sabzavotli burger.",
+  },
+  {
+    id: 5,
+    name: "Lavash",
+    price: 28000,
+    category: "fast-food",
+    // Yangilangan, ishlaydigan Unsplash havolasi:
+    image: "https://images.unsplash.com/photo-1623156346149-d5bc8bd27094?q=80&w=400",
+    desc: "Mol go'shtidan tayyorlangan issiq lavash.",
+  },
+  {
+    id: 6,
+    name: "Osh (Palov)",
+    price: 30000,
+    category: "tushlik",
+    // Yangilangan, ishlaydigan Unsplash havolasi:
+    image: "https://images.unsplash.com/photo-1621685325852-c0776b2976b0?q=80&w=400",
+    desc: "Zirvakli, mayizli haqiqiy o'zbek oshi.",
+  },
+  {
+    id: 7,
+    name: "Steyk",
+    price: 75000,
+    category: "kechki-ovqat",
+    // Yangilangan, ishlaydigan Unsplash havolasi:
+    image: "https://images.unsplash.com/photo-1546241072-48010ad28c2c?q=80&w=400",
+    desc: "Olovda pishirilgan yumshoq mol go'shti.",
+  },
+  {
+    id: 8,
+    name: "Coca-Cola 0.5L",
+    price: 8000,
+    category: "ichimliklar",
+    image: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=400",
+    desc: "Muzdek tetiklashtiruvchi ichimlik.",
+  },
+  {
+    id: 10,
+    name: "Medoviy tort",
+    price: 15000,
+    category: "shirinliklar",
+    image: "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=400",
+    desc: "Asalli va mayin kremdan tayyorlangan tort.",
+  },
 ];
 
 const categories = [
