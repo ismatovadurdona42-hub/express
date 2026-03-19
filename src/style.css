@@ -19,10 +19,45 @@ body {
     background-attachment: fixed;
     color: var(--text-main);
     font-family: 'Plus Jakarta Sans', sans-serif;
-    -webkit-font-smoothing: antialiased;
 }
 
-/* Header & Logo */
+/* Toast Notification */
+.toast-container {
+    position: fixed;
+    top: 25px;
+    right: 25px;
+    padding: 16px 28px;
+    border-radius: 20px;
+    background: rgba(18, 18, 26, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border);
+    color: white;
+    font-weight: 700;
+    z-index: 9999;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+    animation: toastSlide 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.toast-success {
+    border-left: 5px solid #00ff88;
+}
+
+.toast-error {
+    border-left: 5px solid #ff0044;
+}
+
+@keyframes toastSlide {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
 .logo {
     font-size: 42px;
     font-weight: 800;
@@ -32,10 +67,8 @@ body {
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    letter-spacing: -1px;
 }
 
-/* Navigation (Kategoriyalar) */
 .category-scroll {
     display: flex;
     overflow-x: auto;
@@ -57,23 +90,19 @@ body {
     color: var(--text-dim);
     text-decoration: none;
     font-weight: 600;
-    transition: all 0.3s ease;
+    transition: 0.3s;
     white-space: nowrap;
-    cursor: pointer;
 }
 
 .nav-pill.active {
     background: var(--grad);
     color: white;
-    border-color: transparent;
     box-shadow: 0 8px 20px rgba(255, 0, 122, 0.3);
-    transform: translateY(-2px);
 }
 
-/* Product Grid */
 .product-list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 25px;
     max-width: 1200px;
     margin: 0 auto;
@@ -88,14 +117,12 @@ body {
     display: flex;
     align-items: center;
     gap: 20px;
-    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     cursor: pointer;
-    position: relative;
+    transition: 0.3s;
 }
 
 .product-card:hover {
     border-color: var(--accent);
-    background: rgba(255, 255, 255, 0.05);
     transform: translateY(-5px);
 }
 
@@ -104,24 +131,17 @@ body {
     height: 100px;
     border-radius: 20px;
     object-fit: cover;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
 }
 
 .p-details {
     flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
     min-width: 0;
 }
 
 .p-name {
     font-size: 18px;
     font-weight: 700;
-    margin: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    display: block;
 }
 
 .p-price {
@@ -138,19 +158,9 @@ body {
     height: 48px;
     border-radius: 18px;
     font-size: 26px;
-    font-weight: bold;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: 0.2s;
 }
 
-.add-btn:active {
-    transform: scale(0.9);
-}
-
-/* Floating Cart Button */
 .order-btn-float {
     position: fixed;
     bottom: 30px;
@@ -167,17 +177,14 @@ body {
     font-size: 18px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
     z-index: 1000;
-    cursor: pointer;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
 }
 
-/* Modals */
 .modal-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.75);
+    background: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(15px);
     display: flex;
     justify-content: center;
@@ -189,126 +196,37 @@ body {
 .modal-box {
     background: #0f0f15;
     width: 100%;
-    max-width: 500px;
+    max-width: 480px;
     border-radius: 35px;
     border: 1px solid var(--border);
     position: relative;
     max-height: 90vh;
     overflow-y: auto;
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
 }
 
 .modal-header {
     padding: 25px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
     border-bottom: 1px solid var(--border);
 }
 
-.close-top {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background: rgba(255, 255, 255, 0.1);
-    border: none;
-    color: white;
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    cursor: pointer;
-    z-index: 100;
-}
-
-/* Cart Items */
 .cart-row {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding: 18px;
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: 22px;
-    margin: 10px 20px;
-    border: 1px solid var(--border);
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border);
 }
 
-.item-meta {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.item-meta b {
-    font-size: 16px;
-    color: white;
-}
-
-.item-meta small {
-    color: var(--accent);
-    font-weight: 700;
-}
-
-.cart-actions {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.cart-actions button {
-    width: 34px;
-    height: 34px;
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--border);
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-/* Inputs & Forms */
 .modern-input {
     width: calc(100% - 40px);
     margin: 10px 20px;
     padding: 16px;
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid var(--border);
-    border-radius: 16px;
+    border-radius: 18px;
     color: white;
     font-size: 16px;
-    font-family: inherit;
-}
-
-.modern-input:focus {
-    border-color: var(--accent);
-    outline: none;
-    background: rgba(255, 255, 255, 0.08);
-}
-
-.toggle-group,
-.payment-grid {
-    display: flex;
-    gap: 10px;
-    padding: 10px 20px;
-}
-
-.toggle-group button,
-.payment-grid button {
-    flex: 1;
-    padding: 14px;
-    border-radius: 15px;
-    border: 1px solid var(--border);
-    background: transparent;
-    color: var(--text-dim);
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.toggle-group button.active,
-.payment-grid button.active {
-    background: var(--grad);
-    color: white;
-    border: none;
 }
 
 .action-primary-btn {
@@ -320,22 +238,57 @@ body {
     border-radius: 20px;
     color: white;
     font-weight: 800;
-    font-size: 16px;
     cursor: pointer;
-    transition: 0.2s;
 }
 
-.action-primary-btn:active {
-    transform: scale(0.98);
+.toggle-group,
+.payment-grid {
+    display: flex;
+    gap: 10px;
+    padding: 15px 20px;
 }
 
-/* Responsivlik */
-@media (max-width: 600px) {
-    .product-list {
-        grid-template-columns: 1fr;
-    }
+.toggle-group button,
+.payment-grid button {
+    flex: 1;
+    padding: 14px;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    cursor: pointer;
+}
 
-    .category-scroll {
-        justify-content: flex-start;
-    }
+.toggle-group button.active,
+.payment-grid button.active {
+    background: var(--grad);
+    color: white;
+    border: none;
+}
+
+.cart-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.cart-actions button {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: none;
+    color: white;
+}
+
+.close-top {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
 }

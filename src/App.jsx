@@ -1,85 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, NavLink, useParams, Navigate } from "react-router-dom";
 import "./style.css";
 
-// Mahsulotlar ro'yxati
 const products = [
-  {
-    id: 1,
-    name: "Blinchik go'shtli",
-    price: 6000,
-    category: "nonushta",
-    // Mana bu birinchi so'ragan rasmingizning ishlaydigan URL manzili:
-    image: "https://static.tildacdn.com/tild3739-3631-4461-a262-633038653861/tarelka_blinchikov.jpeg",
-    desc: "Sifatli mol go'shtidan tayyorlangan mazali blinchik.",
-  },
-  {
-    id: 2,
-    name: "Tuxum va Sosiska",
-    price: 15000,
-    category: "nonushta",
-    image: "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=400",
-    desc: "Klassik tonggi nonushta.",
-  },
-  {
-    id: 3,
-    name: "Sho'rva",
-    price: 22000,
-    category: "ovqatlar",
-    image: "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400",
-    desc: "Issiq va to'yimli go'shtli sho'rva.",
-  },
-  {
-    id: 4,
-    name: "Gamburger",
-    price: 25000,
-    category: "fast-food",
-    image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400",
-    desc: "Maxsus sousli va yangi sabzavotli burger.",
-  },
-  {
-    id: 5,
-    name: "Lavash",
-    price: 28000,
-    category: "fast-food",
-    // Yangilangan va ishlaydigan havola:
-    image: "https://avatars.mds.yandex.net/get-altay/6264381/2a00000182009cbde06cf8cb60e15a783492/L_height",
-    desc: "Mol go'shtidan tayyorlangan issiq lavash.",
-  },
-  {
-    id: 6,
-    name: "Osh (Palov)",
-    price: 30000,
-    category: "tushlik",
-    // Yangilangan va ishlaydigan havola:
-    image: "https://static.zarnews.uz/crop/0/7/720__80_076cee06a80e4ba67c62f97d19776fcd.jpg?img=self&v=1714043643",
-    desc: "Zirvakli, mayizli haqiqiy o'zbek oshi.",
-  },
-  {
-    id: 7,
-    name: "Steyk",
-    price: 75000,
-    category: "kechki-ovqat",
-    // Yangilangan va ishlaydigan havola:
-    image: "https://ferma-m2.ru/images/shop/recipe_image/fceb3813251df3dafdb6994738cb497bc2a4ef50.jpg",
-    desc: "Olovda pishirilgan yumshoq mol go'shti.",
-  },
-  {
-    id: 8,
-    name: "Coca-Cola 0.5L",
-    price: 8000,
-    category: "ichimliklar",
-    image: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=400",
-    desc: "Muzdek tetiklashtiruvchi ichimlik.",
-  },
-  {
-    id: 10,
-    name: "Medoviy tort",
-    price: 15000,
-    category: "shirinliklar",
-    image: "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=400",
-    desc: "Asalli va mayin kremdan tayyorlangan tort.",
-  },
+  { id: 1, name: "Blinchik go'shtli", price: 6000, category: "nonushta", image: "https://static.tildacdn.com/tild3739-3631-4461-a262-633038653861/tarelka_blinchikov.jpeg", desc: "Sifatli mol go'shtidan tayyorlangan mazali blinchik." },
+  { id: 2, name: "Tuxum va Sosiska", price: 15000, category: "nonushta", image: "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=400", desc: "Klassik tonggi nonushta." },
+  { id: 3, name: "Sho'rva", price: 22000, category: "ovqatlar", image: "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400", desc: "Issiq va to'yimli go'shtli sho'rva." },
+  { id: 4, name: "Gamburger", price: 25000, category: "fast-food", image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400", desc: "Maxsus sousli va yangi sabzavotli burger." },
+  { id: 5, name: "Lavash", price: 28000, category: "fast-food", image: "https://avatars.mds.yandex.net/get-altay/6264381/2a00000182009cbde06cf8cb60e15a783492/L_height", desc: "Mol go'shtidan tayyorlangan issiq lavash." },
+  { id: 6, name: "Osh (Palov)", price: 30000, category: "tushlik", image: "https://static.zarnews.uz/crop/0/7/720__80_076cee06a80e4ba67c62f97d19776fcd.jpg?img=self&v=1714043643", desc: "Zirvakli, mayizli haqiqiy o'zbek oshi." },
+  { id: 7, name: "Steyk", price: 75000, category: "kechki-ovqat", image: "https://ferma-m2.ru/images/shop/recipe_image/fceb3813251df3dafdb6994738cb497bc2a4ef50.jpg", desc: "Olovda pishirilgan yumshoq mol go'shti." },
+  { id: 8, name: "Coca-Cola 0.5L", price: 8000, category: "ichimliklar", image: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=400", desc: "Muzdek tetiklashtiruvchi ichimlik." },
+  { id: 10, name: "Medoviy tort", price: 15000, category: "shirinliklar", image: "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=400", desc: "Asalli va mayin kremdan tayyorlangan tort." },
 ];
 
 const categories = [
@@ -113,12 +45,16 @@ function ProductGrid({ addToCart, setSelectedProduct }) {
 }
 
 export default function App() {
-  const [cart, setCart] = useState([]);
+  // Savatchani LocalStorage dan yuklash
+  const [cart, setCart] = useState(() => {
+    const saved = localStorage.getItem("diet_bistro_cart");
+    return saved ? JSON.parse(saved) : [];
+  });
   const [showModal, setShowModal] = useState(false);
   const [step, setStep] = useState("cart");
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [toast, setToast] = useState({ show: false, message: "", type: "success" });
 
-  // Form statelari
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
@@ -126,6 +62,16 @@ export default function App() {
   const [paymentMethod, setPaymentMethod] = useState("cash");
   const [deliveryType, setDeliveryType] = useState("delivery");
   const [requestedTime, setRequestedTime] = useState("Tezroq");
+
+  // Savatcha o'zgarganda saqlash
+  useEffect(() => {
+    localStorage.setItem("diet_bistro_cart", JSON.stringify(cart));
+  }, [cart]);
+
+  const showNotification = (msg, type = "success") => {
+    setToast({ show: true, message: msg, type });
+    setTimeout(() => setToast({ show: false, message: "", type: "success" }), 3500);
+  };
 
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
@@ -136,6 +82,7 @@ export default function App() {
     } else {
       setCart([...cart, { ...product, quantity: 1 }]);
     }
+    showNotification(`${product.name} savatchaga qo'shildi!`);
   };
 
   const decreaseQty = (id) => {
@@ -146,10 +93,9 @@ export default function App() {
 
   const removeFromCart = (id) => setCart(cart.filter((item) => item.id !== id));
 
-  // BUYURTMA YUBORISH (TO'G'RIDAN-TO'G'RI TELEGRAMGA)
   const sendOrder = async () => {
     if (!name || !phone) {
-      alert("Iltimos, ism va telefon raqamingizni kiriting!");
+      showNotification("Ism va tel raqamni kiriting!", "error");
       return;
     }
 
@@ -181,32 +127,31 @@ ${cartText}
       const response = await fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          chat_id: CHAT_ID,
-          text: message,
-          parse_mode: "HTML"
-        }),
+        body: JSON.stringify({ chat_id: CHAT_ID, text: message, parse_mode: "HTML" }),
       });
 
-      const result = await response.json();
-
       if (response.ok) {
-        alert("Buyurtmangiz muvaffaqiyatli yuborildi! ✅");
+        showNotification("Buyurtma muvaffaqiyatli yuborildi! ✅");
         setCart([]);
         setShowModal(false);
         setName(""); setPhone(""); setAddress(""); setComment("");
       } else {
-        alert(`Xatolik: ${result.description} ❌`);
+        showNotification("Xatolik yuz berdi ❌", "error");
       }
     } catch (error) {
-      console.error("Xato:", error);
-      alert("Internet bilan ulanishda xatolik! ❌");
+      showNotification("Internet bilan ulanishda xato! ❌", "error");
     }
   };
 
   return (
     <Router>
       <div className="app-container">
+        {toast.show && (
+          <div className={`toast-container ${toast.type === "error" ? "toast-error" : "toast-success"}`}>
+            {toast.message}
+          </div>
+        )}
+
         <header>
           <h1 className="logo">Diet Bistro</h1>
           <nav className="category-scroll">
@@ -227,12 +172,12 @@ ${cartText}
 
         {cart.length > 0 && (
           <button className="order-btn-float" onClick={() => { setShowModal(true); setStep("cart"); }}>
-            <span>🛒 Savatcha</span>
+            <span>🛒 Savatcha ({cart.length})</span>
             <span>{total.toLocaleString()} so'm</span>
           </button>
         )}
 
-        {/* Mahsulot detali modali */}
+        {/* Product Detail Modal */}
         {selectedProduct && (
           <div className="modal-overlay" onClick={() => setSelectedProduct(null)}>
             <div className="modal-box" onClick={e => e.stopPropagation()}>
@@ -242,7 +187,7 @@ ${cartText}
                 <p style={{ color: '#94a3b8', margin: '15px 0' }}>{selectedProduct.desc}</p>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <span style={{ fontSize: '22px', fontWeight: '800', color: '#ff007a' }}>{selectedProduct.price.toLocaleString()} so'm</span>
-                  <button className="add-btn" style={{ width: 'auto', padding: '0 20px' }} onClick={() => { addToCart(selectedProduct); setSelectedProduct(null); }}>Qo'shish</button>
+                  <button className="action-primary-btn" style={{ width: 'auto', margin: 0, padding: '12px 25px' }} onClick={() => { addToCart(selectedProduct); setSelectedProduct(null); }}>Qo'shish</button>
                 </div>
               </div>
               <button className="close-top" onClick={() => setSelectedProduct(null)}>✕</button>
@@ -250,7 +195,7 @@ ${cartText}
           </div>
         )}
 
-        {/* Savatcha va Yakunlash modali */}
+        {/* Cart/Checkout Modal */}
         {showModal && (
           <div className="modal-overlay">
             <div className="modal-box">
@@ -260,8 +205,8 @@ ${cartText}
               </div>
 
               {step === "cart" ? (
-                <div style={{ padding: '0 20px 20px 20px' }}>
-                  <div className="cart-list" style={{ maxHeight: '300px', overflowY: 'auto', marginBottom: '15px' }}>
+                <div style={{ padding: '0 0 20px 0' }}>
+                  <div className="cart-list" style={{ maxHeight: '40vh', overflowY: 'auto' }}>
                     {cart.map((item) => (
                       <div key={item.id} className="cart-row">
                         <div className="item-meta">
@@ -284,10 +229,10 @@ ${cartText}
                   <button className="action-primary-btn" onClick={() => setStep("checkout")}>Keyingi qadam</button>
                 </div>
               ) : (
-                <div style={{ padding: '0 20px 20px 20px' }}>
-                  <div className="toggle-group" style={{ flexDirection: 'column', gap: '5px', marginBottom: '15px' }}>
-                    <label style={{ fontSize: '14px', color: '#94a3b8' }}>Yetkazish vaqti:</label>
-                    <div style={{ display: 'flex', gap: '10px' }}>
+                <div style={{ padding: '0 0 20px 0' }}>
+                  <div className="toggle-group" style={{ flexDirection: 'column', gap: '5px' }}>
+                    <label style={{ fontSize: '14px', color: '#94a3b8', paddingLeft: '20px' }}>Yetkazish vaqti:</label>
+                    <div style={{ display: 'flex', gap: '10px', padding: '0 20px' }}>
                       <input type="time" className="modern-input" style={{ margin: 0, flex: 1 }} value={requestedTime === "Tezroq" ? "" : requestedTime} onChange={(e) => setRequestedTime(e.target.value)} />
                       <button className={`nav-pill ${requestedTime === "Tezroq" ? "active" : ""}`} style={{ borderRadius: '16px', margin: 0 }} onClick={() => setRequestedTime("Tezroq")}>Hozir</button>
                     </div>
@@ -301,7 +246,7 @@ ${cartText}
                     <button className={paymentMethod === "payme" ? "active" : ""} onClick={() => setPaymentMethod("payme")}>💳 Payme</button>
                   </div>
                   <button className="action-primary-btn" onClick={sendOrder}>Buyurtma berish</button>
-                  <button onClick={() => setStep("cart")} style={{ width: '100%', background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer', marginTop: '10px' }}>← Orqaga</button>
+                  <button onClick={() => setStep("cart")} style={{ width: '100%', background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer' }}>← Orqaga</button>
                 </div>
               )}
             </div>
